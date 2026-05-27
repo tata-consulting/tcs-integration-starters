@@ -1,0 +1,33 @@
+openapi: 3.0.3
+info:
+  title: HTTP to EventBridge starter
+  version: 0.1.0
+paths:
+  /orders:
+    post:
+      summary: Accept an order event and forward it to the event bus
+      operationId: createOrderEvent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderEvent'
+      responses:
+        '202':
+          description: Event accepted for asynchronous processing
+components:
+  schemas:
+    OrderEvent:
+      type: object
+      required:
+        - orderId
+        - source
+      properties:
+        orderId:
+          type: string
+        source:
+          type: string
+        payload:
+          type: object
+          additionalProperties: true
