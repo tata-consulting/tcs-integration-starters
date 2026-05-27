@@ -1,0 +1,31 @@
+{
+  "type": "record",
+  "name": "OrderCreated",
+  "namespace": "io.tcs.platform.orders",
+  "fields": [
+    {"name": "orderId", "type": "string"},
+    {"name": "customerId", "type": "string"},
+    {
+      "name": "totalAmount",
+      "type": {"type": "bytes", "logicalType": "decimal", "precision": 10, "scale": 2}
+    },
+    {
+      "name": "createdAt",
+      "type": {"type": "long", "logicalType": "timestamp-millis"}
+    },
+    {
+      "name": "items",
+      "type": {
+        "type": "array",
+        "items": {
+          "type": "record",
+          "name": "OrderItem",
+          "fields": [
+            {"name": "sku", "type": "string"},
+            {"name": "quantity", "type": "int"}
+          ]
+        }
+      }
+    }
+  ]
+}
